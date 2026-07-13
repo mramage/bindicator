@@ -2,9 +2,12 @@
 
 The Bindicator is a small light-up wheelie bin to remind me which bin needs to be taken out each week. The idea has been around for a while, with a number of implementations.  This is my version.  It is built on ESPhome, with the scheduling/control of the light done through Home Assistant.
 
+The 3D model is available here: https://cad.onshape.com/documents/7bfc2e8c7397341745520f8a/w/db7810f82f046ec1c24a4751/e/b911aa94a8af75f5be7592ad?renderMode=0&uiState=6a54f3f8db7545b8e7d1085a
+
+I'll upload STL and STEP files later.
+
 # Dimensions
 85mm tall, 44mm wide, 51mm deep
-
 
 # Parts used
 
