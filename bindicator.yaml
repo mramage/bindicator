@@ -1,0 +1,81 @@
+esphome:
+  name: bindicator
+  friendly_name: bindicator
+
+esp32:
+  board: esp32-c6-devkitc-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret bindicator_apikey
+
+ota:
+  - platform: esphome
+    password: !secret bindicator_ota_pw
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  min_auth_mode: WPA2
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Bindicator Fallback Hotspot"
+    password: !secret FallbackHotspotPW
+
+captive_portal:
+
+light:
+  - platform: esp32_rmt_led_strip
+    rgb_order: GRB
+    pin: GPIO20
+    num_leds: 4
+    chipset: ws2812
+    name: "Bindicator"
+    rmt_symbols: 96
+    restore_mode: ALWAYS_OFF
+    effects:
+      - flicker:
+      - pulse:
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 0.5s
+          update_interval: 0.5s
+          min_brightness: 0%
+          max_brightness: 100%
+      - pulse:
+          name: "Slow Pulse"
+          transition_length: 500ms
+          update_interval: 2s
+      - pulse:
+          name: "Asymmetrical Pulse"
+          transition_length:
+            on_length: 1s
+            off_length: 500ms
+          update_interval: 1.5s
+      - addressable_twinkle:
+      - addressable_twinkle:
+          name: Twinkle Effect With Custom Values
+          twinkle_probability: 5%
+          progress_interval: 4ms
+      - addressable_flicker:
+      - addressable_flicker:
+          name: Flicker Effect With Custom Values
+          update_interval: 16ms
+          intensity: 5%
+      - addressable_scan:
+      - addressable_scan:
+          name: Scan Effect With Custom Values
+          move_interval: 100ms
+          scan_width: 1
+      - addressable_rainbow:
+      - addressable_rainbow:
+          name: Rainbow Effect With Custom Values
+          speed: 10
+          width: 12
